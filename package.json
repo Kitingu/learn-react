@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "kiting'u",
   "license": "MIT",
+  "scripts": {
+    "build": "babel indecision-app/src/app.js --out-file=indecision-app/public/scripts/app.js --presets=env,react"
+  },
   "dependencies": {
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1"
