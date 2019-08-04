@@ -12,5 +12,13 @@ const template = (
     </ol>
   </div>
 );
+// assignment
+const template2 = (
+  <div>
+    <h1>Benedict Mwendwa</h1>
+    <p>Age: 25</p>
+    <p>Location Nairobi</p>
+  </div>
+);
 const appRoot = document.getElementById("app");
-ReactDOM.render(template, appRoot);
+ReactDOM.render(template2, appRoot);

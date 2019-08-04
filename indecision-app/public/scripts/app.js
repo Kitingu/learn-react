@@ -28,5 +28,25 @@ var template = React.createElement(
     )
   )
 );
+// assignment
+var template2 = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Benedict Mwendwa"
+  ),
+  React.createElement(
+    "p",
+    null,
+    "Age: 25"
+  ),
+  React.createElement(
+    "p",
+    null,
+    "Location Nairobi"
+  )
+);
 var appRoot = document.getElementById("app");
-ReactDOM.render(template, appRoot);
+ReactDOM.render(template2, appRoot);
