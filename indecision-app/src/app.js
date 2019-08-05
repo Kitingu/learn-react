@@ -9,7 +9,7 @@
 const app = {
   title: "Indecision App",
   subtitle: "Talk is cheap",
-  options: ['one', 'two']
+  options: ["one", "two"]
 };
 
 const template = (
@@ -23,25 +23,34 @@ const template = (
   </div>
 );
 
-const user = {
-  username: "Benedict Mwendwa",
-  userAge: 27,
-  userLocation: "Nairobi"
+let count = 0;
+/**
+ * classes are defined as className in jsx coz it is a reserved keyword
+ */
+const myId = "add";
+const addOne = () => {
+  console.log("addOne");
 };
-
-const getLocation = location => {
-  if (location) {
-    return <p>Location: {location}</p>;
-  }
+const minusOne = () => {
+  console.log("addOne");
 };
-
-// assignment
-const template2 = (
+const reset = () => {
+  console.log("reset");
+};
+const templateTwo = (
   <div>
-    <h1>{user.username ? user.username : "anonymous"} </h1>
-    {user.userAge && user.userAge >= 18 && <p>Age:{user.userAge} </p>}
-    {getLocation(user.userLocation)}
+    <h1>Count: {count} </h1>
+    <button id={myId} onClick={addOne} className='btn'>
+      +1
+    </button>
+    <button onClick={minusOne} className='btn'>
+      -1
+    </button>
+    <button onClick={reset} className='btn'>
+      reset
+    </button>
   </div>
 );
+
 const appRoot = document.getElementById("app");
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);

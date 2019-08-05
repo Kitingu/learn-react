@@ -11,7 +11,7 @@
 var app = {
   title: "Indecision App",
   subtitle: "Talk is cheap",
-  options: ['one', 'two']
+  options: ["one", "two"]
 };
 
 var template = React.createElement(
@@ -43,41 +43,46 @@ var template = React.createElement(
   )
 );
 
-var user = {
-  username: "Benedict Mwendwa",
-  userAge: 27,
-  userLocation: "Nairobi"
+var count = 0;
+/**
+ * classes are defined as className in jsx coz it is a reserved keyword
+ */
+var myId = "add";
+var addOne = function addOne() {
+  console.log("addOne");
 };
-
-var getLocation = function getLocation(location) {
-  if (location) {
-    return React.createElement(
-      "p",
-      null,
-      "Location: ",
-      location
-    );
-  }
+var minusOne = function minusOne() {
+  console.log("addOne");
 };
-
-// assignment
-var template2 = React.createElement(
+var reset = function reset() {
+  console.log("reset");
+};
+var templateTwo = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    user.username ? user.username : "anonymous",
+    "Count: ",
+    count,
     " "
   ),
-  user.userAge && user.userAge >= 18 && React.createElement(
-    "p",
-    null,
-    "Age:",
-    user.userAge,
-    " "
+  React.createElement(
+    "button",
+    { id: myId, onClick: addOne, className: "btn" },
+    "+1"
   ),
-  getLocation(user.userLocation)
+  React.createElement(
+    "button",
+    { onClick: minusOne, className: "btn" },
+    "-1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: reset, className: "btn" },
+    "reset"
+  )
 );
+
 var appRoot = document.getElementById("app");
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
