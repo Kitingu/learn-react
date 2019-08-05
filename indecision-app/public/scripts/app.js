@@ -49,40 +49,51 @@ var count = 0;
  */
 var myId = "add";
 var addOne = function addOne() {
+  count += 1;
+  renderCounterApp();
   console.log("addOne");
 };
 var minusOne = function minusOne() {
+  count -= 1;
+  renderCounterApp();
   console.log("addOne");
 };
 var reset = function reset() {
+  count = 0;
+  renderCounterApp();
   console.log("reset");
 };
-var templateTwo = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    "Count: ",
-    count,
-    " "
-  ),
-  React.createElement(
-    "button",
-    { id: myId, onClick: addOne, className: "btn" },
-    "+1"
-  ),
-  React.createElement(
-    "button",
-    { onClick: minusOne, className: "btn" },
-    "-1"
-  ),
-  React.createElement(
-    "button",
-    { onClick: reset, className: "btn" },
-    "reset"
-  )
-);
 
 var appRoot = document.getElementById("app");
-ReactDOM.render(templateTwo, appRoot);
+
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    "div",
+    null,
+    React.createElement(
+      "h1",
+      null,
+      "Count: ",
+      count,
+      " "
+    ),
+    React.createElement(
+      "button",
+      { id: myId, onClick: addOne, className: "btn" },
+      "+1"
+    ),
+    React.createElement(
+      "button",
+      { onClick: minusOne, className: "btn" },
+      "-1"
+    ),
+    React.createElement(
+      "button",
+      { onClick: reset, className: "btn" },
+      "reset"
+    )
+  );
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
