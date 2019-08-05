@@ -3,10 +3,16 @@
  * jsx javascript XML
  */
 
+//assignment 2
+const app = {
+  title: "Indecision App",
+  subtitle: "Talk is cheap"
+};
+
 const template = (
   <div>
-    <h1>Indecision App</h1>
-    <p>This is my first jsx expression</p>
+    <h1>{app.title}</h1>
+    <p>{app.subtitle}</p>
     <ol>
       <li> Item One</li>
     </ol>
@@ -28,4 +34,4 @@ const template2 = (
   </div>
 );
 const appRoot = document.getElementById("app");
-ReactDOM.render(template2, appRoot);
+ReactDOM.render(template, appRoot);

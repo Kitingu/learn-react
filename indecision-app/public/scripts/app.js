@@ -5,18 +5,24 @@
  * jsx javascript XML
  */
 
+//assignment 2
+var app = {
+  title: "Indecision App",
+  subtitle: "Talk is cheap"
+};
+
 var template = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    "Indecision App"
+    app.title
   ),
   React.createElement(
     "p",
     null,
-    "This is my first jsx expression"
+    app.subtitle
   ),
   React.createElement(
     "ol",
@@ -59,4 +65,4 @@ var template2 = React.createElement(
   )
 );
 var appRoot = document.getElementById("app");
-ReactDOM.render(template2, appRoot);
+ReactDOM.render(template, appRoot);
