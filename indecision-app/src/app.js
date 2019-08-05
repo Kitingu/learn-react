@@ -12,15 +12,19 @@ const template = (
     </ol>
   </div>
 );
-const username = "Benedict Mwendwa";
-const userAge = 27;
-const userLocation = "Nairobi";
+
+const user = {
+  username: "Benedict Mwendwa",
+  userAge: 27,
+  userLocation: "Nairobi"
+};
+
 // assignment
 const template2 = (
   <div>
-    <h1>{username.toLowerCase()} </h1>
-    <p>Age: {userAge}</p>
-    <p>Location: {userLocation}</p>
+    <h1>{user.username} </h1>
+    <p>Age: {user.userAge}</p>
+    <p>Location: {user.userLocation}</p>
   </div>
 );
 const appRoot = document.getElementById("app");
