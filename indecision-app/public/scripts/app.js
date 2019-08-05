@@ -11,89 +11,75 @@
 var app = {
   title: "Indecision App",
   subtitle: "Talk is cheap",
-  options: ["one", "two"]
+  options: []
 };
 
-var template = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    app.title
-  ),
-  app.title && React.createElement(
-    "p",
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    "p",
-    null,
-    app.options.length > 0 ? "Here are your options" : "No options"
-  ),
-  React.createElement(
-    "ol",
-    null,
-    React.createElement(
-      "li",
-      null,
-      " Item One"
-    )
-  )
-);
-
-var count = 0;
-/**
- * classes are defined as className in jsx coz it is a reserved keyword
- */
-var myId = "add";
-var addOne = function addOne() {
-  count += 1;
-  renderCounterApp();
-  console.log("addOne");
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
+  var option = e.target.elements.option.value;
+  if (option) {
+    console.log(option);
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    renderTemplate();
+  }
 };
-var minusOne = function minusOne() {
-  count -= 1;
-  renderCounterApp();
-  console.log("addOne");
+var resetLength = function resetLength(e) {
+  app.options.length = 0;
+  renderTemplate();
 };
-var reset = function reset() {
-  count = 0;
-  renderCounterApp();
-  console.log("reset");
-};
-
-var appRoot = document.getElementById("app");
-
-var renderCounterApp = function renderCounterApp() {
-  var templateTwo = React.createElement(
+var renderTemplate = function renderTemplate() {
+  var template = React.createElement(
     "div",
     null,
     React.createElement(
       "h1",
       null,
-      "Count: ",
-      count,
-      " "
+      app.title
+    ),
+    app.title && React.createElement(
+      "p",
+      null,
+      app.subtitle
+    ),
+    React.createElement(
+      "p",
+      null,
+      app.options.length > 0 ? "Here are your options" : "No options"
+    ),
+    React.createElement(
+      "p",
+      null,
+      app.options.length
     ),
     React.createElement(
       "button",
-      { id: myId, onClick: addOne, className: "btn" },
-      "+1"
+      { onClick: resetLength },
+      "remove all"
     ),
     React.createElement(
-      "button",
-      { onClick: minusOne, className: "btn" },
-      "-1"
+      "ol",
+      null,
+      React.createElement(
+        "li",
+        null,
+        " Item One"
+      )
     ),
     React.createElement(
-      "button",
-      { onClick: reset, className: "btn" },
-      "reset"
+      "form",
+      { onSubmit: onFormSubmit },
+      React.createElement("input", { type: "text", name: "option" }),
+      React.createElement(
+        "button",
+        null,
+        "Add option"
+      )
     )
   );
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+// functions in react expressions are referenced to not called
+var appRoot = document.getElementById("app");
+renderTemplate();

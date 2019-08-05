@@ -9,59 +9,43 @@
 const app = {
   title: "Indecision App",
   subtitle: "Talk is cheap",
-  options: ["one", "two"]
+  options: []
 };
 
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.title && <p>{app.subtitle}</p>}
-    <p>{app.options.length > 0 ? "Here are your options" : "No options"}</p>
-    <ol>
-      <li> Item One</li>
-    </ol>
-  </div>
-);
-
-let count = 0;
-/**
- * classes are defined as className in jsx coz it is a reserved keyword
- */
-const myId = "add";
-const addOne = () => {
-  count += 1;
-  renderCounterApp();
-  console.log("addOne");
+const onFormSubmit = e => {
+  e.preventDefault();
+  const option = e.target.elements.option.value;
+  if (option) {
+    console.log(option);
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    renderTemplate();
+  }
 };
-const minusOne = () => {
-  count -= 1;
-  renderCounterApp();
-  console.log("addOne");
+const resetLength = e => {
+  app.options.length = 0;
+  renderTemplate();
 };
-const reset = () => {
-  count = 0;
-  renderCounterApp();
-  console.log("reset");
-};
-
-const appRoot = document.getElementById("app");
-
-const renderCounterApp = () => {
-  const templateTwo = (
+const renderTemplate = () => {
+  const template = (
     <div>
-      <h1>Count: {count} </h1>
-      <button id={myId} onClick={addOne} className='btn'>
-        +1
-      </button>
-      <button onClick={minusOne} className='btn'>
-        -1
-      </button>
-      <button onClick={reset} className='btn'>
-        reset
-      </button>
+      <h1>{app.title}</h1>
+      {app.title && <p>{app.subtitle}</p>}
+      <p>{app.options.length > 0 ? "Here are your options" : "No options"}</p>
+      <p>{app.options.length}</p>
+      <button onClick={resetLength}>remove all</button>
+      <ol>
+        <li> Item One</li>
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type='text' name='option' />
+        <button>Add option</button>
+      </form>
     </div>
   );
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+// functions in react expressions are referenced to not called
+const appRoot = document.getElementById("app");
+renderTemplate();
