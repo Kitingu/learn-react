@@ -28,6 +28,9 @@ var template = React.createElement(
     )
   )
 );
+var username = "Benedict Mwendwa";
+var userAge = 27;
+var userLocation = "Nairobi";
 // assignment
 var template2 = React.createElement(
   "div",
@@ -35,17 +38,20 @@ var template2 = React.createElement(
   React.createElement(
     "h1",
     null,
-    "Benedict Mwendwa"
+    username.toLowerCase(),
+    " "
   ),
   React.createElement(
     "p",
     null,
-    "Age: 25"
+    "Age: ",
+    userAge
   ),
   React.createElement(
     "p",
     null,
-    "Location Nairobi"
+    "Location: ",
+    userLocation
   )
 );
 var appRoot = document.getElementById("app");
