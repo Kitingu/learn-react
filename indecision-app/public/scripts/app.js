@@ -24,6 +24,7 @@ var onFormSubmit = function onFormSubmit(e) {
     renderTemplate();
   }
 };
+var numbers = [55, 158, 82];
 var resetLength = function resetLength(e) {
   app.options.length = 0;
   renderTemplate();
@@ -60,11 +61,13 @@ var renderTemplate = function renderTemplate() {
     React.createElement(
       "ol",
       null,
-      React.createElement(
-        "li",
-        null,
-        " Item One"
-      )
+      app.options.map(function (option) {
+        return React.createElement(
+          "li",
+          { key: option },
+          option
+        );
+      })
     ),
     React.createElement(
       "form",
@@ -81,5 +84,7 @@ var renderTemplate = function renderTemplate() {
 };
 
 // functions in react expressions are referenced to not called
+// arrays in jsx must have a key
+// react ignores null undefined and false i.e falsie statements and objects, booleans
 var appRoot = document.getElementById("app");
 renderTemplate();

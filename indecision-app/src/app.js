@@ -22,6 +22,7 @@ const onFormSubmit = e => {
     renderTemplate();
   }
 };
+const numbers = [55, 158, 82];
 const resetLength = e => {
   app.options.length = 0;
   renderTemplate();
@@ -35,7 +36,9 @@ const renderTemplate = () => {
       <p>{app.options.length}</p>
       <button onClick={resetLength}>remove all</button>
       <ol>
-        <li> Item One</li>
+        {app.options.map(option => {
+          return <li key={option}>{option}</li>;
+        })}
       </ol>
       <form onSubmit={onFormSubmit}>
         <input type='text' name='option' />
@@ -47,5 +50,7 @@ const renderTemplate = () => {
 };
 
 // functions in react expressions are referenced to not called
+// arrays in jsx must have a key
+// react ignores null undefined and false i.e falsie statements and objects, booleans
 const appRoot = document.getElementById("app");
 renderTemplate();
