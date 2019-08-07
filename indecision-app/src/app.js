@@ -1,3 +1,16 @@
+class IndecisionApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Action />
+        <Options />
+        <AddOption />
+      </div>
+    );
+  }
+}
+
 class Header extends React.Component {
   render() {
     return (
@@ -17,7 +30,12 @@ class Action extends React.Component {
 
 class Options extends React.Component {
   render() {
-    return <p>Options component here</p>;
+    return (
+      <div>
+        Options component here
+        <Option />
+      </div>
+    );
   }
 }
 
@@ -27,15 +45,9 @@ class AddOption extends React.Component {
   }
 }
 
-const jsx = (
-  <div>
-    <Header />
-    <Action />
-    <Options />
-    <AddOption />
-    {/* the componenent being called for rendering */}
-  </div>
-);
-ReactDOM.render(jsx, document.getElementById("app"));
-// every react component must include render method
-// every class must start with caps in react
+class Option extends React.Component {
+  render() {
+    return <div>Option component here</div>;
+  }
+}
+ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
