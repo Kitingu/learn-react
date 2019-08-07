@@ -1,65 +1,41 @@
-/**
- * react code live here
- * jsx javascript XML
- * undefined null and false are ignored by jsx
- * ternary operator, unlike normal functions can be used inside jsx expression
- */
-
-//assignment 2
-const app = {
-  title: "Indecision App",
-  subtitle: "Talk is cheap",
-  options: []
-};
-
-const onFormSubmit = e => {
-  e.preventDefault();
-  const option = e.target.elements.option.value;
-  if (option) {
-    console.log(option);
-    app.options.push(option);
-    e.target.elements.option.value = "";
-    renderTemplate();
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Indecision</h1>
+        <h2>Put your life in the hands of a computer</h2>
+      </div>
+    );
   }
-};
-const numbers = [55, 158, 82];
-const resetLength = e => {
-  app.options.length = 0;
-  renderTemplate();
-};
+}
 
-const onMakeDecision = () => {
-  const randomNum = Math.floor(Math.random() * app.options.length);
-  const option = app.options[randomNum];
-  alert(option);
-};
+class Action extends React.Component {
+  render() {
+    return <button>What should I do?</button>;
+  }
+}
 
+class Options extends React.Component {
+  render() {
+    return <p>Options component here</p>;
+  }
+}
 
-const renderTemplate = () => {
-  const template = (
-    <div>
-      <h1>{app.title}</h1>
-      {app.title && <p>{app.subtitle}</p>}
-      <p>{app.options.length > 0 ? "Here are your options" : "No options"}</p>
-      <button disabled={app.options.length == 0}onClick={onMakeDecision}> What should I do</button>
+class AddOption extends React.Component {
+  render() {
+    return <p>Add Options component here</p>;
+  }
+}
 
-      <button onClick={resetLength}>remove all</button>
-      <ol>
-        {app.options.map(option => {
-          return <li key={option}>{option}</li>;
-        })}
-      </ol>
-      <form onSubmit={onFormSubmit}>
-        <input type='text' name='option' />
-        <button>Add option</button>
-      </form>
-    </div>
-  );
-  ReactDOM.render(template, appRoot);
-};
-
-// functions in react expressions are referenced to not called
-// arrays in jsx must have a key
-// react ignores null undefined and false i.e falsie statements and objects, booleans
-const appRoot = document.getElementById("app");
-renderTemplate();
+const jsx = (
+  <div>
+    <Header />
+    <Action />
+    <Options />
+    <AddOption />
+    {/* the componenent being called for rendering */}
+  </div>
+);
+ReactDOM.render(jsx, document.getElementById("app"));
+// every react component must include render method
+// every class must start with caps in react
