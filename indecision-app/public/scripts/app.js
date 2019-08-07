@@ -1,38 +1,97 @@
 "use strict";
 
-var visibility = false;
+/**
+ * react code live here
+ * jsx javascript XML
+ * undefined null and false are ignored by jsx
+ * ternary operator, unlike normal functions can be used inside jsx expression
+ */
 
-var toggleVisibility = function toggleVisibility() {
-  visibility = !visibility;
-  render();
+//assignment 2
+var app = {
+  title: "Indecision App",
+  subtitle: "Talk is cheap",
+  options: []
 };
 
-var render = function render() {
-  var jsx = React.createElement(
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
+  var option = e.target.elements.option.value;
+  if (option) {
+    console.log(option);
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    renderTemplate();
+  }
+};
+var numbers = [55, 158, 82];
+var resetLength = function resetLength(e) {
+  app.options.length = 0;
+  renderTemplate();
+};
+
+var onMakeDecision = function onMakeDecision() {
+  var randomNum = Math.floor(Math.random() * app.options.length);
+  var option = app.options[randomNum];
+  alert(option);
+};
+
+var renderTemplate = function renderTemplate() {
+  var template = React.createElement(
     "div",
     null,
     React.createElement(
       "h1",
       null,
-      "Visibility Toggle"
+      app.title
+    ),
+    app.title && React.createElement(
+      "p",
+      null,
+      app.subtitle
+    ),
+    React.createElement(
+      "p",
+      null,
+      app.options.length > 0 ? "Here are your options" : "No options"
     ),
     React.createElement(
       "button",
-      { onClick: toggleVisibility },
-      visibility ? "Hide details" : "Show details"
+      { disabled: app.options.length == 0, onClick: onMakeDecision },
+      " What should I do"
     ),
-    visibility && React.createElement(
-      "div",
+    React.createElement(
+      "button",
+      { onClick: resetLength },
+      "remove all"
+    ),
+    React.createElement(
+      "ol",
       null,
+      app.options.map(function (option) {
+        return React.createElement(
+          "li",
+          { key: option },
+          option
+        );
+      })
+    ),
+    React.createElement(
+      "form",
+      { onSubmit: onFormSubmit },
+      React.createElement("input", { type: "text", name: "option" }),
       React.createElement(
-        "p",
+        "button",
         null,
-        "Hey. These are some details you can now see!"
+        "Add option"
       )
     )
   );
-
-  ReactDOM.render(jsx, document.getElementById("app"));
+  ReactDOM.render(template, appRoot);
 };
 
-render();
+// functions in react expressions are referenced to not called
+// arrays in jsx must have a key
+// react ignores null undefined and false i.e falsie statements and objects, booleans
+var appRoot = document.getElementById("app");
+renderTemplate();
