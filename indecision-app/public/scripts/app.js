@@ -85,11 +85,6 @@ var Action = function (_React$Component3) {
       alert("handlePick");
     }
   }, {
-    key: "handleRemoveAll",
-    value: function handleRemoveAll() {
-      alert("handleRemove");
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -99,11 +94,6 @@ var Action = function (_React$Component3) {
           "button",
           { onClick: this.handlePick },
           "What should I do?"
-        ),
-        React.createElement(
-          "button",
-          { onClick: this.handleRemoveAll },
-          "Remove All?"
         )
       );
     }
@@ -115,21 +105,39 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
-  function Options() {
+  function Options(props) {
     _classCallCheck(this, Options);
 
-    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+    _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+    return _this4;
   }
 
   _createClass(Options, [{
+    key: "handleRemoveAll",
+    value: function handleRemoveAll() {
+      console.log(this.props.options);
+
+      alert("handleRemove");
+    }
+  }, {
     key: "render",
     value: function render() {
-      return React.createElement(
-        "div",
-        null,
-        this.props.options.map(function (option) {
-          return React.createElement(Option, { key: option, optionText: option });
-        })
+      return (
+        //bind this for the render method
+        React.createElement(
+          "div",
+          null,
+          React.createElement(
+            "button",
+            { onClick: this.handleRemoveAll },
+            "Remove All?"
+          ),
+          this.props.options.map(function (option) {
+            return React.createElement(Option, { key: option, optionText: option });
+          })
+        )
       );
     }
   }]);
@@ -202,3 +210,5 @@ var Option = function (_React$Component6) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById("app"));
+
+// this is only available to render and class methods

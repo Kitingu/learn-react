@@ -30,23 +30,31 @@ class Action extends React.Component {
   handlePick() {
     alert("handlePick");
   }
-  handleRemoveAll() {
-    alert("handleRemove");
-  }
+
   render() {
     return (
       <div>
         <button onClick={this.handlePick}>What should I do?</button>
-        <button onClick={this.handleRemoveAll}>Remove All?</button>
       </div>
     );
   }
 }
 
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
+  handleRemoveAll() {
+    console.log(this.props.options);
+
+    alert("handleRemove");
+  }
   render() {
     return (
+      //bind this for the render method
       <div>
+        <button onClick={this.handleRemoveAll}>Remove All?</button>
         {this.props.options.map(option => (
           <Option key={option} optionText={option} />
         ))}
@@ -81,3 +89,5 @@ class Option extends React.Component {
   }
 }
 ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
+
+// this is only available to render and class methods
