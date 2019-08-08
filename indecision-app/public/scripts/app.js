@@ -80,12 +80,31 @@ var Action = function (_React$Component3) {
   }
 
   _createClass(Action, [{
+    key: "handlePick",
+    value: function handlePick() {
+      alert("handlePick");
+    }
+  }, {
+    key: "handleRemoveAll",
+    value: function handleRemoveAll() {
+      alert("handleRemove");
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
-        "button",
+        "div",
         null,
-        "What should I do?"
+        React.createElement(
+          "button",
+          { onClick: this.handlePick },
+          "What should I do?"
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.handleRemoveAll },
+          "Remove All?"
+        )
       );
     }
   }]);
@@ -128,12 +147,30 @@ var AddOption = function (_React$Component5) {
   }
 
   _createClass(AddOption, [{
+    key: "onFormSubmit",
+    value: function onFormSubmit(e) {
+      e.preventDefault();
+      var option = e.target.elements.option.value.trim();
+      if (option) {
+        alert(option);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
-        "p",
+        "div",
         null,
-        "Add Options component here"
+        React.createElement(
+          "form",
+          { onSubmit: this.onFormSubmit },
+          React.createElement("input", { type: "text", name: "option" }),
+          React.createElement(
+            "button",
+            null,
+            "Add option"
+          )
+        )
       );
     }
   }]);
