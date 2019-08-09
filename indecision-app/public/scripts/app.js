@@ -20,7 +20,7 @@ var IndecisionApp = function (_React$Component) {
     _this.handlePick = _this.handlePick.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
-      options: []
+      options: props.options
     };
     return _this;
   }
@@ -60,13 +60,12 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var title = "indecision";
       var subTitle = "Put your life in the hands of a computer";
 
       return React.createElement(
         "div",
         null,
-        React.createElement(Header, { title: title, subTitle: subTitle }),
+        React.createElement(Header, { subTitle: subTitle }),
         React.createElement(Action, {
           hasOptions: this.state.options.length > 0,
           handlePick: this.handlePick
@@ -83,6 +82,10 @@ var IndecisionApp = function (_React$Component) {
   return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+  options: []
+};
+
 var Header = function Header(props) {
   /**
    * the applications header component
@@ -96,14 +99,16 @@ var Header = function Header(props) {
       null,
       props.title
     ),
-    React.createElement(
+    props.subtitle && React.createElement(
       "h2",
       null,
       props.subTitle
     )
   );
 };
-
+Header.defaultProps = {
+  title: "Indecision"
+};
 var Action = function Action(props) {
   return React.createElement(
     "div",
@@ -195,15 +200,6 @@ var Option = function Option(props) {
   );
 };
 
-// stateless components are just functions
-// const User = (props) => {
-//   return (
-//     <div>
-//       <p>Name:{props.name}</p>
-//       <p>Age: {props.age}</p>
-//     </div>
-//   );
-// };
-ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById("app"));
+ReactDOM.render(React.createElement(IndecisionApp, { options: ["option one"] }), document.getElementById("app"));
 
 // this is only available to render and class methods
