@@ -57,52 +57,40 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component {
+const Header = props => {
   /**
    * the applications header component
    */
-  render() {
-    console.log(this.props);
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subTitle}</h2>
-      </div>
-    );
-  }
-}
 
-class Action extends React.Component {
-  /**
-   * call the pick a random option method
-   */
-  render() {
-    return (
-      <div>
-        <button
-          onClick={this.props.handlePick}
-          disabled={!this.props.hasOptions}
-        >
-          What should I do?
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <h2>{props.subTitle}</h2>
+    </div>
+  );
+};
 
-class Options extends React.Component {
-  render() {
-    return (
-      //bind this for the render method
-      <div>
-        <button onClick={this.props.handleDeleteOptions}>Remove All?</button>
-        {this.props.options.map(option => (
-          <Option key={option} optionText={option} />
-        ))}
-      </div>
-    );
-  }
-}
+const Action = props => {
+  return (
+    <div>
+      <button onClick={props.handlePick} disabled={!props.hasOptions}>
+        What should I do?
+      </button>
+    </div>
+  );
+};
+
+const Options = props => {
+  return (
+    //bind this for the render method
+    <div>
+      <button onClick={props.handleDeleteOptions}>Remove All?</button>
+      {props.options.map(option => (
+        <Option key={option} optionText={option} />
+      ))}
+    </div>
+  );
+};
 
 class AddOption extends React.Component {
   constructor(props) {
@@ -123,7 +111,7 @@ class AddOption extends React.Component {
   render() {
     return (
       <div>
-      {this.state.error && <p>{this.state.error}</p> }
+        {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.handleAddOption}>
           <input type='text' name='option' />
           <button>Add option</button>
@@ -133,11 +121,19 @@ class AddOption extends React.Component {
   }
 }
 
-class Option extends React.Component {
-  render() {
-    return <div>{this.props.optionText}</div>;
-  }
-}
+const Option = props => {
+  return <div>{props.optionText}</div>;
+};
+
+// stateless components are just functions
+// const User = (props) => {
+//   return (
+//     <div>
+//       <p>Name:{props.name}</p>
+//       <p>Age: {props.age}</p>
+//     </div>
+//   );
+// };
 ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
 
 // this is only available to render and class methods
