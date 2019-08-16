@@ -6,9 +6,9 @@
   "author": "kiting'u",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --watch",
+    "build": "webpack",
     "serve": "live-server indecision-app/public",
-    "build-babel": "babel indecision-app/src/app.js --out-file=indecision-app/public/scripts/app.js --presets=env,react --watch"
+    "dev-server": "webpack-dev-server"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -19,6 +19,7 @@
     "live-server": "1.2.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
-    "webpack": "3.1.0"
+    "webpack": "3.1.0",
+    "webpack-dev-server": "2.5.1"
   }
 }
