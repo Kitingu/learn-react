@@ -5,16 +5,35 @@ import Options from "./Options";
 import Action from "./Action";
 
 export default class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.state = {
-      options: props.options
-    };
-  }
+  state = {
+    options: []
+  };
+
+  handleAddOption = option => {
+    if (!option) {
+      return "Enter a valid option";
+    } else if (this.state.options.indexOf(option) > -1) {
+      return "This option already exists";
+    }
+    this.setState(prevState => ({
+      options: prevState.options.concat([option])
+    }));
+  };
+  handleDeleteOption = optionToRemove => {
+    this.setState(prevState => ({
+      options: prevState.options.filter(option => optionToRemove !== option)
+    }));
+  };
+  handleDeleteOptions = () => {
+    /** reset options to an empty array */
+    this.setState(() => ({ options: [] }));
+  };
+  handlePick = () => {
+    /**pick a random option */
+    const randomIndex = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomIndex];
+    alert(option);
+  };
   componentDidUpdate(prevProps, prevState) {
     if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
@@ -32,31 +51,7 @@ export default class IndecisionApp extends React.Component {
       // do nothing
     }
   }
-  handleAddOption(option) {
-    if (!option) {
-      return "Enter a valid option";
-    } else if (this.state.options.indexOf(option) > -1) {
-      return "This option already exists";
-    }
-    this.setState(prevState => ({
-      options: prevState.options.concat([option])
-    }));
-  }
-  handleDeleteOption(optionToRemove) {
-    this.setState(prevState => ({
-      options: prevState.options.filter(option => optionToRemove !== option)
-    }));
-  }
-  handleDeleteOptions() {
-    /** reset options to an empty array */
-    this.setState(() => ({ options: [] }));
-  }
-  handlePick() {
-    /**pick a random option */
-    const randomIndex = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomIndex];
-    alert(option);
-  }
+
   render() {
     const subTitle = "Put your life in the hands of a computer";
 
