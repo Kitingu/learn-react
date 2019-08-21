@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "serve": "live-server indecision-app/public",
+    "serve": "public",
     "dev-server": "webpack-dev-server"
   },
   "dependencies": {
