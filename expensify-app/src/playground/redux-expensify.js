@@ -1,11 +1,36 @@
 import { createStore, combineReducers } from "redux";
+import uuid from "uuid";
+import AddExpenseComponentPage from "../components/AddExpenseComponentPage";
+
+const addExpense = ({
+  description = "",
+  note = "",
+  amount = 0,
+  createdAt = 0
+} = {}) => ({
+  type: "ADD_EXPENSE",
+  expense: {
+    id: uuid(),
+    description,
+    note,
+    amount,
+    createdAt
+  }
+});
+// remove expense
+const removeExpense = ({ id } = {}) => ({
+  type: "REMOVE_EXPENSE",
+  id
+});
 
 // Expenses Reducer
 const expensesReducerDefault = [];
 const expensesReducer = (state = expensesReducerDefault, action) => {
   switch (action.type) {
-    // case value:
-    //   break;
+    case "ADD_EXPENSE":
+      return [...state, action.expense];
+    case "REMOVE_EXPENSE":
+      return state.filter(({ id }) => id !== action.id);
 
     default:
       return state;
@@ -14,30 +39,36 @@ const expensesReducer = (state = expensesReducerDefault, action) => {
 
 // filtersReducer
 const filtersReducerDefault = {
-    text: "rent",
-    sortBy: "amount",
-    startDate: undefined,
-    endDate: undefined
+  text: "rent",
+  sortBy: "amount",
+  startDate: undefined,
+  endDate: undefined
 };
-const filtersReducer = (state = filtersReducerDefault , action) => {
-    switch (action.type) {
-        // case value:
-        //   break;
+const filtersReducer = (state = filtersReducerDefault, action) => {
+  switch (action.type) {
+    // case:value
+    // break
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };
 
 // store creation
 const store = createStore(
   combineReducers({
     expenses: expensesReducer,
-    filters:filtersReducer
+    filters: filtersReducer
   })
 );
-console.log(store.getState());
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
+const expenseOne = store.dispatch(
+  addExpense({ description: "rent", amount: 100 })
+);
+store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 const demoState = {
   expenses: [
     {
