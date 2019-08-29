@@ -122,17 +122,25 @@ const filtersReducer = (state = filtersReducerDefault, action) => {
   }
 };
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
-  return expenses.filter(expense => {
-    const startDateMatch =
-      typeof startDate !== "number" || expense.createdAt >= startDate;
-    const endDateMatch =
-      typeof endDate !== "number" || expenses.createdAt <= endDate;
-    const textMatch = expense.description
-      .toLowerCase()
-      .includes(text.toLowerCase());
+  return expenses
+    .filter(expense => {
+      const startDateMatch =
+        typeof startDate !== "number" || expense.createdAt >= startDate;
+      const endDateMatch =
+        typeof endDate !== "number" || expenses.createdAt <= endDate;
+      const textMatch = expense.description
+        .toLowerCase()
+        .includes(text.toLowerCase());
 
-    return startDateMatch && endDateMatch && textMatch;
-  });
+      return startDateMatch && endDateMatch && textMatch;
+    })
+    .sort((a, b) => {
+      if (sortBy === "date") {
+        return a.createdAt < b.createdAt ? 1 : -1;
+      } else if (sortBy === "amount") {
+        return a.amount < b.amount ? 1 : -1;
+      }
+    });
 };
 // store creation
 const store = createStore(
@@ -148,17 +156,20 @@ store.subscribe(() => {
 });
 
 const expenseOne = store.dispatch(
-  addExpense({ description: "rent", amount: 100, createdAt: 1000 })
+  addExpense({ description: "rent", amount: 100, createdAt: 99 })
 );
-const expenseTwo = store.dispatch(
-  addExpense({ description: "school-fee", amount: 500, createdAt: -1000 })
+const expenseOn = store.dispatch(
+  addExpense({ description: "rent", amount: 7100, createdAt: 1 })
 );
+// const expenseTwo = store.dispatch(
+//   addExpense({ description: "school-fee", amount: 500, createdAt: -1000 })
+// );
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 580000 }));
 // store.dispatch(setTextFilter("rent"));
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
-store.dispatch(setStartDate(0));
+// store.dispatch(setStartDate(0));
 // store.dispatch(setStartDate());
 // store.dispatch(setEndDate(1250));
 const demoState = {
