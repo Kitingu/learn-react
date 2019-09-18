@@ -17,7 +17,7 @@ store.dispatch(
 store.dispatch(
     addExpense({ description: "gas-bill", amount: 200, createdAt: 132 })
 );
-store.dispatch(setTextFilter("water"));
+store.dispatch(setTextFilter("bill"));
 
 setTimeout(() => {
     store.dispatch(setTextFilter("bill"));
