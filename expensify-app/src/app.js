@@ -15,7 +15,7 @@ store.dispatch(
     addExpense({ description: "water bill", amount: 70000, createdAt: 112 })
 );
 store.dispatch(
-    addExpense({ description: "gas-bill", amount: 200, createdAt: 132 })
+DMMHEHE Fellow    addExpense({ description: "gas-bill", amount: 200, createdAt: 132 })
 );
 store.dispatch(
   addExpense({ description: "rent", amount: 50000, createdAt: 12 })
