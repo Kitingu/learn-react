@@ -21,3 +21,49 @@ test('should render error for invalid form submission', () => {
 	expect(wrapper.state('error').length).toBeGreaterThan(0);
 	expect(wrapper).toMatchSnapshot();
 });
+// at is used to fetch by index
+test('should set description on input change', () => {
+	const value = 'new description';
+	const wrapper = shallow(<ExpenseForm />);
+	wrapper
+		.find('input')
+		.at(0)
+		.simulate('change', {
+			target: { value },
+		});
+	expect(wrapper.state('description')).toBe(value);
+	expect(wrapper).toMatchSnapshot();
+});
+test('should set note on text area change', () => {
+	const value = 'urgent';
+	const wrapper = shallow(<ExpenseForm />);
+	wrapper
+		.find('textarea')
+		.at(0)
+		.simulate('change', {
+			target: { value },
+		});
+	expect(wrapper.state('note')).toBe(value);
+});
+test('should set amount if valid input', () => {
+    const value = '23.50';
+    const wrapper = shallow(<ExpenseForm />);
+    wrapper
+        .find('input')
+        .at(1)
+        .simulate('change', {
+            target: { value },
+        });
+    expect(wrapper.state('amount')).toBe(value);
+});
+test('should set amount if invalid input', () => {
+	const value = '23.1222';
+	const wrapper = shallow(<ExpenseForm />);
+	wrapper
+		.find('input')
+		.at(1)
+		.simulate('change', {
+			target: { value },
+		});
+	expect(wrapper.state('amount')).toBe('');
+});
