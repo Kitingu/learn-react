@@ -16,9 +16,9 @@ export class AddExpenseComponentPage extends React.Component {
 		);
 	}
 }
-const mapDispatchToProps = (dispatch) => {
-	addExpense: (expense) => dispatch(addExpense(expense));
-};
+const mapDispatchToProps = (dispatch) => ({
+	addExpense: (expense) => dispatch(addExpense(expense))
+});
 
 // use a dispatch function function to make it easy to test the component
 export default connect(
